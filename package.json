@@ -1,0 +1,77 @@
+{
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@emotion/react": "^11.11.3",
+		"@emotion/styled": "^11.11.0",
+		"@fontsource/roboto": "^5.0.8",
+		"@mui/icons-material": "^5.15.2",
+		"@mui/material": "^5.15.2",
+		"@preact/signals": "^1.2.2",
+		"chroma-js": "^2.4.2",
+		"delaunator": "^5.0.0",
+		"lodash.chunk": "^4.2.0",
+		"mui-color-input": "^2.0.1",
+		"preact": "^10.13.1"
+	},
+	"devDependencies": {
+		"@preact/preset-vite": "^2.5.0",
+		"@types/chroma-js": "^2.4.3",
+		"@types/delaunator": "^5.0.2",
+		"@types/lodash.chunk": "^4.2.9",
+		"@typescript-eslint/eslint-plugin": "^6.16.0",
+		"@typescript-eslint/parser": "^6.16.0",
+		"eslint": "^8.56.0",
+		"eslint-config-preact": "^1.3.0",
+		"eslint-config-prettier": "^9.1.0",
+		"prettier": "^3.1.1",
+		"typescript": "^5.3.3",
+		"vite": "^4.3.2"
+	},
+	"eslintConfig": {
+		"env": {
+			"es2021": true
+		},
+		"extends": [
+			"eslint:recommended",
+			"plugin:@typescript-eslint/recommended",
+			"preact",
+			"prettier"
+		],
+		"parser": "@typescript-eslint/parser",
+		"parserOptions": {
+			"ecmaVersion": "latest",
+			"sourceType": "module"
+		},
+		"plugins": [
+			"@typescript-eslint"
+		],
+		"rules": {
+			"no-unused-vars": "off",
+			"@typescript-eslint/no-unused-vars": [
+				"error"
+			],
+			"no-redeclare": "off",
+			"@typescript-eslint/no-redeclare": [
+				"error"
+			],
+			"react-hooks/rules-of-hooks": "off"
+		},
+		"settings": {
+			"jest": {
+				"version": 29
+			}
+		}
+	},
+	"prettier": {
+		"trailingComma": "all",
+		"tabWidth": 2,
+		"semi": false,
+		"singleQuote": true
+	}
+}
