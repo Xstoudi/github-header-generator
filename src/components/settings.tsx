@@ -24,6 +24,7 @@ import {
   nameColor$,
   scopeColor$,
   descriptionColor$,
+  outputScale$,
 } from '../signals/settings'
 import { MuiColorInput } from 'mui-color-input'
 import * as React from 'preact/compat'
@@ -99,75 +100,84 @@ export default function Settings() {
               fullWidth
             />
           </Field>
+          <Field name="Output scale">
+            <Slider
+              min={1}
+              max={10}
+              step={1}
+              marks
+              valueLabelDisplay="auto"
+              value={outputScale$.value}
+              onChange={(_, value) => (outputScale$.value = value as number)}
+            />
+          </Field>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="h6" gutterBottom>
+            Content colors
+          </Typography>
+          <Box mb={2}>
+            <MuiColorInput
+              value={scopeColor$.value}
+              onChange={(value) => (scopeColor$.value = value)}
+              fullWidth
+            />
+          </Box>
+          <Box mb={2}>
+            <MuiColorInput
+              value={nameColor$.value}
+              onChange={(value) => (nameColor$.value = value)}
+              fullWidth
+            />
+          </Box>
+          <Box mb={2}>
+            <MuiColorInput
+              value={descriptionColor$.value}
+              onChange={(value) => (descriptionColor$.value = value)}
+              fullWidth
+            />
+          </Box>
+          <Field name="Height">
+            <Slider
+              min={0}
+              max={1000}
+              step={50}
+              marks
+              valueLabelDisplay="auto"
+              value={height$.value}
+              onChange={(_, value) => (height$.value = value as number)}
+            />
+          </Field>
+          <Field name="Variance">
+            <Slider
+              defaultValue={50}
+              min={0}
+              max={100}
+              valueLabelDisplay="auto"
+              value={variance$.value}
+              onChange={(_, value) => (variance$.value = value as number)}
+            />
+          </Field>
+          <Field name="X scale color end">
+            <MuiColorInput
+              value={xColorEnd$.value}
+              onChange={(value) => (xColorEnd$.value = value)}
+              fullWidth
+            />
+          </Field>
+          <Field name="Y scale color end">
+            <MuiColorInput
+              value={yColorEnd$.value}
+              onChange={(value) => (yColorEnd$.value = value)}
+              fullWidth
+            />
+          </Field>
           <Field name="Debug">
             <Checkbox
               checked={debug$.value}
               onChange={(_, value) => (debug$.value = value)}
             />
           </Field>
-        </Grid>
-        <Grid item xs={6}>
-          <Stack>
-            <Typography variant="h6" gutterBottom>
-              Content colors
-            </Typography>
-            <Box mb={2}>
-              <MuiColorInput
-                value={scopeColor$.value}
-                onChange={(value) => (scopeColor$.value = value)}
-                fullWidth
-              />
-            </Box>
-            <Box mb={2}>
-              <MuiColorInput
-                value={nameColor$.value}
-                onChange={(value) => (nameColor$.value = value)}
-                fullWidth
-              />
-            </Box>
-            <Box mb={2}>
-              <MuiColorInput
-                value={descriptionColor$.value}
-                onChange={(value) => (descriptionColor$.value = value)}
-                fullWidth
-              />
-            </Box>
-            <Field name="Height">
-              <Slider
-                min={0}
-                max={1000}
-                step={50}
-                marks
-                valueLabelDisplay="auto"
-                value={height$.value}
-                onChange={(_, value) => (height$.value = value as number)}
-              />
-            </Field>
-            <Field name="Variance">
-              <Slider
-                defaultValue={50}
-                min={0}
-                max={100}
-                valueLabelDisplay="auto"
-                value={variance$.value}
-                onChange={(_, value) => (variance$.value = value as number)}
-              />
-            </Field>
-            <Field name="X scale color end">
-              <MuiColorInput
-                value={xColorEnd$.value}
-                onChange={(value) => (xColorEnd$.value = value)}
-                fullWidth
-              />
-            </Field>
-            <Field name="Y scale color end">
-              <MuiColorInput
-                value={yColorEnd$.value}
-                onChange={(value) => (yColorEnd$.value = value)}
-                fullWidth
-              />
-            </Field>
-          </Stack>
         </Grid>
       </Grid>
     </Grid>

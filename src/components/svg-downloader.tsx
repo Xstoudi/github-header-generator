@@ -1,6 +1,6 @@
 import { ComponentChildren } from 'preact'
 import { Box, Button, Grid } from '@mui/material'
-import { height$, viewbox$, width$ } from '../signals/settings'
+import { height$, outputScale$, viewbox$, width$ } from '../signals/settings'
 import { useRef } from 'preact/compat'
 
 interface SVGDownloaderProps {
@@ -35,10 +35,16 @@ export default function SVGDownloader({ children }: SVGDownloaderProps) {
       const height = height$.peek()
 
       const canvas = document.createElement('canvas')
-      canvas.setAttribute('width', `${width}px`)
-      canvas.setAttribute('height', `${height}px`)
+      canvas.setAttribute('width', `${outputScale$.value * width}px`)
+      canvas.setAttribute('height', `${outputScale$.value * height}px`)
       const context = canvas.getContext('2d')
-      context.drawImage(image, 0, 0, width, height)
+      context.drawImage(
+        image,
+        0,
+        0,
+        outputScale$.value * width,
+        outputScale$.value * height,
+      )
 
       canvas.toBlob((pngBlob) => {
         const pngUrl = URL.createObjectURL(pngBlob)
@@ -61,8 +67,8 @@ export default function SVGDownloader({ children }: SVGDownloaderProps) {
         <svg
           id="preview"
           viewBox={viewbox$}
-          width={width$}
-          height={height$}
+          width={width$.value}
+          height={height$.value}
           shapeRendering="crispEdges"
           fontFamily="Noto Sans Mono"
           ref={svgRef}
