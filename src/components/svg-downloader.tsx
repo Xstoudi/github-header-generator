@@ -28,12 +28,31 @@ export default function SVGDownloader({ children }: SVGDownloaderProps) {
 
     const svgBlob = new Blob([source], { type: 'image/svg+xml;charset=utf-8' })
     const svgUrl = URL.createObjectURL(svgBlob)
-    const downloadLink = document.createElement('a')
-    downloadLink.href = svgUrl
-    downloadLink.download = 'header.svg'
-    document.body.appendChild(downloadLink)
-    downloadLink.click()
-    document.body.removeChild(downloadLink)
+
+    const image = new Image()
+    image.addEventListener('load', () => {
+      const width = width$.peek()
+      const height = height$.peek()
+
+      const canvas = document.createElement('canvas')
+      canvas.setAttribute('width', `${width}px`)
+      canvas.setAttribute('height', `${height}px`)
+      const context = canvas.getContext('2d')
+      context.drawImage(image, 0, 0, width, height)
+
+      canvas.toBlob((pngBlob) => {
+        const pngUrl = URL.createObjectURL(pngBlob)
+        const link = document.createElement('a')
+        link.href = pngUrl
+        link.download = 'header.png'
+        link.click()
+        link.remove()
+        canvas.remove()
+        URL.revokeObjectURL(svgUrl)
+        URL.revokeObjectURL(pngUrl)
+      }, 'image/png')
+    })
+    image.src = svgUrl
   }
 
   return (
