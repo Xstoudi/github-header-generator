@@ -20,7 +20,6 @@ import FakeTexts from './fake-texts'
 import FontLoader from './font-includer'
 
 export default function Preview() {
-  console.log(scopeSize$.value)
   return (
     <Card>
       <Box p={2}>
