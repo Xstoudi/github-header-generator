@@ -15,8 +15,9 @@ import {
   width$,
 } from '../signals/settings'
 import { Box, Card } from '@mui/material'
-import SVGDownloader from './svg_downloader'
-import FakeTexts from './fake_texts'
+import SVGDownloader from './svg-downloader'
+import FakeTexts from './fake-texts'
+import FontLoader from './font-includer'
 
 export default function Preview() {
   console.log(scopeSize$.value)
@@ -24,10 +25,7 @@ export default function Preview() {
     <Card>
       <Box p={2}>
         <SVGDownloader>
-          <style>
-            @import
-            url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@300;600;700&display=swap');
-          </style>
+          <FontLoader />
           {polygons$.value.map(({ vertices: { a, b, c }, center, color }) => (
             <polygon
               key={center}
